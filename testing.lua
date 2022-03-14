@@ -1,3 +1,5 @@
-require("RedOS.apis.drawing")
+require("RedOS.apis.red32")
 
-parseTheme("RedOS/themes/default.lua")
+require(red32:getTheme("RedOS/themes/default.lua"))
+
+red32:popup("Hello", "This is a test!", THEME_popup)

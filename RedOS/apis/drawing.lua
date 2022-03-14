@@ -1,3 +1,4 @@
+drawing = {}
 term.setTextColor(colors.white)
 local button = {}
 
@@ -5,30 +6,30 @@ function clearTable()
    button = {}
 end
 
-function setButtonText(name, text)
+function drawing:setButtonText(name, text)
    button[name]["text"] = text
-   screen()
+   drawing:screen()
 end
 
-function setButtonToggle(name, buttonOn)
+function drawing:setButtonToggle(name, buttonOn)
    print(name)
    print(button[name]["active"])
    button[name]["active"] = buttonOn
-   screen()
+   drawing:screen()
 end
 
-function setButtonColors(name, color, secondary_color)
+function drawing:setButtonColors(name, color, secondary_color)
    button[name]["color"] = color
    button[name]["secondary_color"] = secondary_color
-   screen()
+   drawing:screen()
 end
 
-function getButtonToggle(name)
+function drawing:getButtonToggle(name)
    local toggle = button[name]["active"]
    return toggle
 end
                                              
-function addButton(name, text, func, param, xmin, xmax, ymin, ymax, color, secondary_color)
+function drawing:addButton(name, text, func, param, xmin, xmax, ymin, ymax, color, secondary_color)
    button[name] = {}
    button[name]["text"] = text
    button[name]["func"] = func
@@ -42,7 +43,7 @@ function addButton(name, text, func, param, xmin, xmax, ymin, ymax, color, secon
    button[name]["secondary_color"] = secondary_color
 end  
 
-function fill(text, color, secondary_color, bData)
+function drawing:fill(text, color, secondary_color, bData)
    local bgcol = term.getBackgroundColor()
 
    local xLoc = ((bData["xmin"] + bData["xmax"]) / 2) - (text:len() / 2)
@@ -59,23 +60,23 @@ function fill(text, color, secondary_color, bData)
    term.setBackgroundColor(bgcol)
 end
      
-function screen()
+function drawing:screen()
    for name,data in pairs(button) do
-      fill(data["text"], data["color"], data["secondary_color"], data)
+      drawing:fill(data["text"], data["color"], data["secondary_color"], data)
    end
 end
 
-function toggleButton(name)
+function drawing:toggleButton(name)
    button[name]["active"] = not button[name]["active"]
-   screen()
+   drawing:screen()
 end     
 
-function flash(name)
-   toggleButton(name)
-   screen()
-   sleep(0.15)
-   toggleButton(name)
-   screen()
+function drawing:flash(name)
+   drawing:toggleButton(name)
+   drawing:screen()
+   drawing:sleep(0.15)
+   drawing:toggleButton(name)
+   drawing:screen()
 end
                                              
 function checkxy(x, y)
@@ -105,24 +106,4 @@ end
 function label(w, h, text)
    term.setCursorPos(w, h)
    term.write(text)
-end
-
-function parseTheme(file)
-   if fs.exists(file) == false then error("Theme doesn't exist.") end
-   
-   file = file:sub(1, file:find(".lua")-1)
-   local path = ""
-   for i=1, file:len() do
-      local char = file:sub(i, i)
-      if char == "/" then
-         path = path.."."
-      else
-         path = path..char
-      end
-   end
-
-   require(path)
-   textutils.serialise(theme)
-
-
 end
