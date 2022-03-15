@@ -7,6 +7,20 @@ local termx, termy = term.getSize()
 local xLoc = (termx / 2) - 2
 local yLoc = (termy / 2) + (termy / 4)
 
+local cancel = {
+    ["xmin"] = 2,
+    ["xmax"] = 23,
+    ["ymin"] = 12,
+    ["ymax"] = 18
+}
+
+local install = {
+    ["xmin"] = 27,
+    ["xmax"] = 50,
+    ["ymin"] = 12,
+    ["ymax"] = 18
+}
+
 -- Cancel Button
 paintutils.drawFilledBox(1, yLoc-1,xLoc-1, termy, colors.lightGray)
 paintutils.drawFilledBox(2, yLoc-2,xLoc, termy-1, colors.red)
@@ -49,7 +63,16 @@ local mon = peripheral.find("monitor")
 local installing = true
 while installing do
     local event, button, x, y = os.pullEvent("mouse_click")
-    mon.clear()
-    mon.setCursorPos(1,1)
-    mon.write(x.."    "..y)
+
+    if button ~= 1 then return end
+
+    if x >= cancel["xmin"] and x <= cancel["xmax"] and y >= cancel["ymin"] and y <= cancel["ymax"] then
+        mon.clear()
+        mon.setCursorPos(1,1)
+        mon.write("Clicked!")
+    else
+        mon.clear()
+        mon.setCursorPos(1,1)
+        mon.write("Not Clicked!")
+    end
 end
