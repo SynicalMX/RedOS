@@ -50,7 +50,13 @@ red32.popup = function(title, text)
     yLoc = y2 - 1
     term.setCursorPos(xLoc, yLoc)
     term.write("Ok")
-    repeat local event, button, x, y = os.pullEvent("mouse_click") until x == 26 or
-        x == 27 and y == 13
+    repeat
+        local event, button, x, y = os.pullEvent("mouse_click")
+    until x == 26 or x == 27 and y == 13
+
+    term.setBackgroundColor(colors.black)
+    term.setCursorPos(1,1)
+    term.clear()
+
     return true
 end

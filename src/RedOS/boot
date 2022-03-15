@@ -1,3 +1,16 @@
 dofile("RedOS/red32.lua")
 red32.loadTheme()
-red32.popup("Hello!", "This is a test!")
+term.setBackgroundColor(colors.white)
+term.clear()
+local termx, termy = term.getSize()
+local xLoc = (termx / 2) - 6
+local logo = paintutils.loadImage("/RedOS/sys/assets/logo.nfp")
+paintutils.drawImage(logo, xLoc, termy / 2 - 3)
+xLoc = (termx / 2) - (string.len("Booting RedOS...") / 2)
+term.setCursorPos(xLoc, termy / 2 + 6)
+term.setTextColor(colors.red)
+term.setBackgroundColor(colors.white)
+term.write("Booting RedOS...")
+
+sleep(5)
+
