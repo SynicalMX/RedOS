@@ -1,0 +1,3 @@
+dofile("RedOS/red32.lua")
+red32.loadTheme()
+red32.popup("Hello!", "This is a test!")

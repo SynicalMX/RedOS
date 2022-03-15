@@ -1,0 +1,31 @@
+THEME = {
+    ["popup"] = {
+        ["border"] = colors.red,
+        ["inner"] = colors.white,
+        ["btn"] = colors.white,
+        ["btn_text"] = colors.black,
+        ["text"] = colors.black,
+        ["title"] = colors.black,
+        ["title_back"] = colors.red
+    },
+
+    ["home"] = {
+        ["top_bar"] = colors.red,
+        ["top_text"] = colors.black,
+        ["inner"] = colors.white,
+        ["text"] = colors.black
+    },
+
+    ["buttons"] = {
+        ["state_off"] = {
+            ["outer"] = colors.red,
+            ["inner"] = colors.white,
+            ["text"] = colors.black
+        },
+        ["state_on"] = {
+            ["outer"] = 24574,
+            ["inner"] = colors.white,
+            ["text"] = colors.black
+        }
+    }
+}
