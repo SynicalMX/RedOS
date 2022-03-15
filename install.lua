@@ -26,7 +26,7 @@ paintutils.drawFilledBox(1, yLoc-1,xLoc-1, termy, colors.lightGray)
 paintutils.drawFilledBox(2, yLoc-2,xLoc, termy-1, colors.red)
 
 -- Install Button
-paintutils.drawFilledBox(termx / 2+1, yLoc-1, termx-1, termy, colors.lightGray)
+paintutils.drawFilledBox(termx / 2+1, yLoc-1, termx-2, termy, colors.lightGray)
 paintutils.drawFilledBox(termx-1, yLoc-2, xLoc+4, termy-1, colors.lime)
 
 -- Cancel Text
@@ -48,7 +48,7 @@ term.write("Install")
 term.setBackgroundColor(colors.gray)
 term.setCursorPos(3,3)
 term.write("RedOS Installer")
-term.setCursorPos(5,3)
+term.setCursorPos(5,4)
 term.write("Made with <3 by SynicalMX")
 
 -- Version
@@ -57,22 +57,29 @@ xLoc = (termx / 2) - (string.len("RedOS v0.1") / 2)
 term.setCursorPos(xLoc, yLoc)
 term.write("RedOS v0.1")
 
-local mon = peripheral.find("monitor")
-
 -- Loop
 local installing = true
 while installing do
     local event, button, x, y = os.pullEvent("mouse_click")
 
-    if button ~= 1 then return end
-
-    if x >= cancel["xmin"] and x <= cancel["xmax"] and y >= cancel["ymin"] and y <= cancel["ymax"] then
-        mon.clear()
-        mon.setCursorPos(1,1)
-        mon.write("Clicked!")
-    else
-        mon.clear()
-        mon.setCursorPos(1,1)
-        mon.write("Not Clicked!")
+    if button == 1 then
+        if x >= cancel["xmin"] and x <= cancel["xmax"] and y >= cancel["ymin"] and y <= cancel["ymax"] then
+            term.setBackgroundColor(colors.black)
+            term.setTextColor(colors.white)
+            term.clear()
+            print("Installation canceled.")
+            term.setCursorPos(1,2)
+            installing = false
+        elseif x >= install["xmin"] and x <= install["xmax"] and y >= install["ymin"] and y <= install["ymax"] then
+            term.setBackgroundColor(colors.gray)
+            term.clear()
+            break
+        end
     end
+end
+
+if installing then
+    paintutils.drawBox(2, 14, 50, 16, colors.lightGray)
+    term.setCursorPos((termx/2) - (string.len("Installing RedOS") / 2), termy/2)
+    term.write("Installing RedOS")
 end
