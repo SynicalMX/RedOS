@@ -3,6 +3,7 @@ term.setBackgroundColor(colors.gray)
 term.clear()
 
 -- Variable Setup
+local httpRoot = "https://raw.githubusercontent.com/SynicalMX/RedOS/master/"
 local termx, termy = term.getSize()
 local xLoc = (termx / 2) - 2
 local yLoc = (termy / 2) + (termy / 4)
@@ -52,7 +53,7 @@ term.setCursorPos(5,4)
 term.write("Made by SynicalMX")
 
 -- Version
-local versionHTTP = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/version")
+local versionHTTP = http.get(httpRoot.."version")
 local version = versionHTTP.readAll()
 yLoc = ((termy / 2) - 2)
 xLoc = (termx / 2) - (string.len("RedOS v"..version) / 2)
@@ -81,10 +82,6 @@ while installing do
 end
 
 if installing then
-    paintutils.drawBox(2, 14, 50, 16, colors.lightGray)
-
-    local percentage = 46 / 7
-
     term.setBackgroundColor(colors.gray)
     term.setCursorPos((termx/2) - (string.len("Installing RedOS") / 2), termy/2)
     term.write("Installing RedOS")
@@ -93,7 +90,7 @@ if installing then
     fs.makeDir("/RedOS/sys/assets/")
     fs.makeDir("/RedOS/themes/")
 
-    local download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/src/startup.lua")
+    local download = http.get(httpRoot.."src/startup.lua")
     local handle = download.readAll()
     download.close()
 
@@ -101,7 +98,7 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/src/RedOS/boot")
+    download = http.get(httpRoot.."src/RedOS/boot")
     handle = download.readAll()
     download.close()
 
@@ -109,7 +106,7 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/src/RedOS/red32.lua")
+    download = http.get(httpRoot.."src/RedOS/red32.lua")
     handle = download.readAll()
     download.close()
 
@@ -117,7 +114,7 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/src/RedOS/apis/drawing.lua")
+    download = http.get(httpRoot.."src/RedOS/apis/drawing.lua")
     handle = download.readAll()
     download.close()
 
@@ -125,18 +122,15 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/src/RedOS/sys/theme")
+    download = http.get(httpRoot.."src/RedOS/sys/theme")
     handle = download.readAll()
     download.close()
 
     file = fs.open("/RedOS/sys/theme", "w")
     file.write(handle)
     file.close()
-    
-    curX = term.getCursorPos()
-    paintutils.drawLine(2, 15, 2, curX+percentage, colors.red)
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/src/RedOS/sys/assets/logo.nfp")
+    download = http.get(httpRoot.."src/RedOS/sys/assets/logo.nfp")
     handle = download.readAll()
     download.close()
 
@@ -144,7 +138,7 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/src/RedOS/themes/default")
+    download = http.get(httpRoot.."src/RedOS/themes/default")
     handle = download.readAll()
     download.close()
 
