@@ -3,7 +3,7 @@ term.setBackgroundColor(colors.gray)
 term.clear()
 
 -- Variable Setup
-local httpRoot = "https://raw.githubusercontent.com/SynicalMX/RedOS/master/"
+local httpRoot = "http://10.201.103.0:3000"
 local termx, termy = term.getSize()
 local xLoc = (termx / 2) - 2
 local yLoc = (termy / 2) + (termy / 4)
