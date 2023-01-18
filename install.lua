@@ -70,6 +70,7 @@ while installing do
             term.setBackgroundColor(colors.black)
             term.setTextColor(colors.white)
             term.clear()
+            term.setCursorPos(1,1)
             print("Installation canceled.")
             term.setCursorPos(1,2)
             installing = false
@@ -145,4 +146,10 @@ if installing then
     file = fs.open("/RedOS/themes/default", "w")
     file.write(handle)
     file.close()
+
+    term.setBackgroundColor(colors.gray)
+    term.setCursorPos((termx/2) - (string.len("Rebooting...") / 2), termy/2)
+    term.write("Rebooting...")
+    sleep(3)
+    os.reboot()
 end
