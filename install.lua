@@ -117,7 +117,7 @@ if installing then
     file.write(handle)
     file.close()
 
-    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/src/RedOS/apis/drawing.lua")
+    download = http.get("https://raw.githubusercontent.com/SynicalMX/RedOS/master/src/RedOS/apis/drawing.lua")
     handle = download.readAll()
     download.close()
 
